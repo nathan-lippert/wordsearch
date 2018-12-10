@@ -112,14 +112,25 @@ def test_find_word_at_location__calls_find_word_with_direction_all_directions(
 def test_find_word_at_location__calls_find_word_with_direction_shortcircuit(
     mock_find_word_with_direction, datadir
 ):
-    """ Test that find word at location calls find word with direction
-        and shortcircuits with a success """
+    """ Test that find word at location  shortcircuits with a success """
     mock_find_word_with_direction.return_value = [(0, 0), (0, 1), (0, 2), (0, 3)]
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
     small_wordsearch.find_word_at_location("TEST", (0, 0))
     # This works because assert_called_with only checks the last call.
     # So we can be sure we skipped all the other direction calls because of short circuiting.
     mock_find_word_with_direction.assert_called_with("TEST", (0, 0), (0, 1))
+
+
+@patch("wordsearch.WordSearch.find_word_with_direction")
+def test_find_word_at_location__returns_expected_value(
+    mock_find_word_with_direction, datadir
+):
+    """ Test that find word at location returns expected value """
+    expected_value = [(0, 0), (0, 1), (0, 2), (0, 3)]
+    mock_find_word_with_direction.return_value = expected_value
+    small_wordsearch = WordSearch(datadir.join("small_set.txt"))
+    return_value = small_wordsearch.find_word_at_location("TEST", (0, 0))
+    assert return_value == expected_value
 
 
 @pytest.mark.parametrize(
