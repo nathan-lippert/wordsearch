@@ -13,9 +13,8 @@ class WordSearch(object):
     def __init__(self, input_file):
         with open(input_file, "r") as input_fh:
             input_data = input_fh.read()
-        self.words = input_data.split("\n")[0].split(",")
+        input_lines = input_data.split("\n")
+        self.words = input_lines[0].split(",")
         if self.words == [""]:
             raise InvalidInput("No word list on first line of input file.")
-        self.search_grid = [
-            input_line.split(",") for input_line in input_data.split("\n")[1:]
-        ]
+        self.search_grid = [input_line.split(",") for input_line in input_lines[1:]]
