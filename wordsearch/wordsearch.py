@@ -18,6 +18,8 @@ class WordSearch(object):
         if self.words == [""]:
             raise InvalidInput("No word list on first line of input file.")
         self.search_grid = [input_line.split(",") for input_line in input_lines[1:]]
+        self.num_rows = len(self.search_grid)
+        self.num_cols = len(self.search_grid[0])
 
     def find_starting_letter(self, word):
         """ Find a list of tuples that represent valid starting locations for the word """
@@ -60,8 +62,8 @@ class WordSearch(object):
             if word_idx == len(word):
                 return word_locations
             if not (
-                (0 <= location[0] < len(self.search_grid))
-                and (0 <= location[1] < len(self.search_grid[0]))
+                (0 <= location[0] < self.num_rows)
+                and (0 <= location[1] < self.num_cols)
             ):
                 return None
             if self.search_grid[location[0]][location[1]] != word[word_idx]:
