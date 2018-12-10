@@ -2,6 +2,7 @@ FROM python:3.6-slim
 
 # Install format checker, unit testing platform
 RUN pip install black
+RUN pip install mock
 RUN pip install pytest
 
 # Add code from repo

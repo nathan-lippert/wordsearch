@@ -3,6 +3,7 @@
 from distutils import dir_util
 import os
 
+from mock import patch
 import pytest
 from pytest import fixture
 
@@ -85,12 +86,15 @@ def test_find_starting_letter__valid_word(datadir):
     ]
 
 
-def test_find_word_at_location__success(datadir):
-    """ Test that given a starting location we can find a word when it's there """
+@patch("wordsearch.WordSearch.find_word_with_direction")
+def test_find_word_at_location__calls_find_word_with_direction(
+    mock_find_word_with_direction, datadir
+):
+    """ Test that find word at location calls find word with direction
+        with the expected arguments """
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
-    assert small_wordsearch.find_word_at_location(
-        small_wordsearch.words[0], (0, 0)
-    ) == [(0, 0), (0, 1), (0, 2), (0, 3)]
+    small_wordsearch.find_word_at_location("SOUP", (0, 0))
+    mock_find_word_with_direction.assert_called_with("SOUP", (0, 0), (0, 1))
 
 
 @pytest.mark.parametrize(
