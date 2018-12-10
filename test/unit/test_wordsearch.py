@@ -93,9 +93,20 @@ def test_find_word_at_location__success(datadir):
     ) == [(0, 0), (0, 1), (0, 2), (0, 3)]
 
 
-def test_find_word_with_direction__success(datadir):
+@pytest.mark.parametrize(
+    "word,location,direction,result",
+    [
+        ("TEST", (0, 0), (0, 1), [(0, 0), (0, 1), (0, 2), (0, 3)]),
+        ("TEST", (0, 0), (1, 0), [(0, 0), (1, 0), (2, 0), (3, 0)]),
+        ("TEST", (3, 3), (-1, -1), [(3, 3), (2, 2), (1, 1), (0, 0)]),
+        ("SET", (0, 2), (0, -1), [(0, 2), (0, 1), (0, 0)]),
+        ("SET", (2, 0), (-1, 0), [(2, 0), (1, 0), (0, 0)]),
+        ("SET", (1, 1), (1, 1), [(1, 1), (2, 2), (3, 3)]),
+    ],
+)
+def test_find_word_with_direction(word, location, direction, result, datadir):
     """ Test that a word can be found with a specified direction """
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
-    assert small_wordsearch.find_word_with_direction(
-        small_wordsearch.words[1], (1, 1), (1, 1)
-    ) == [(1, 1), (2, 2), (3, 3)]
+    assert (
+        small_wordsearch.find_word_with_direction(word, location, direction) == result
+    )
