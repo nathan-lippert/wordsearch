@@ -64,3 +64,11 @@ class WordSearch(object):
             word_locations.append(location)
             location = (location[0] + direction[0], location[1] + direction[1])
             word_idx += 1
+
+    def find_word(self, word):
+        """ Find a word in the letter grid, return locations """
+        starting_locations = self.find_starting_letter(word)
+        for location in starting_locations:
+            result = self.find_word_at_location(word, location)
+            if result:
+                return result
