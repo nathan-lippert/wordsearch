@@ -91,3 +91,11 @@ def test_find_word_at_location__success(datadir):
     assert small_wordsearch.find_word_at_location(
         small_wordsearch.words[0], (0, 0)
     ) == [(0, 0), (0, 1), (0, 2), (0, 3)]
+
+
+def test_find_word_with_direction__success(datadir):
+    """ Test that a word can be found with a specified direction """
+    small_wordsearch = WordSearch(datadir.join("small_set.txt"))
+    assert small_wordsearch.find_word_with_direction(
+        small_wordsearch.words[1], (1, 1), (1, 1)
+    ) == [(1, 1), (2, 2), (3, 3)]
