@@ -46,7 +46,9 @@ class WordSearch(object):
         ]
 
         for direction in directions:
-            self.find_word_with_direction(word, location, direction)
+            result = self.find_word_with_direction(word, location, direction)
+            if result:
+                return result
 
     def find_word_with_direction(self, word, location, direction):
         """ Return the indeces for the letters if the word is found """
