@@ -68,3 +68,17 @@ def test_open_file__reads_letter_table(datadir):
         ["W", "Z", "M", "I", "S", "U", "K", "U", "R", "B", "I", "D", "U", "X", "S"],
         ["K", "Y", "L", "B", "Q", "Q", "P", "M", "D", "F", "C", "K", "E", "A", "B"],
     ]
+
+
+def test_find_starting_letter__valid_word(datadir):
+    small_wordsearch = WordSearch(datadir.join("small_set.txt"))
+    assert small_wordsearch.find_starting_letter(small_wordsearch.words[0]) == [
+        (0, 0),
+        (0, 3),
+        (1, 2),
+        (2, 1),
+        (2, 3),
+        (3, 1),
+        (3, 2),
+        (3, 3),
+    ]
