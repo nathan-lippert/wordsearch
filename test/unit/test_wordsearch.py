@@ -150,3 +150,17 @@ def test_find_word_with_direction(word, location, direction, result, datadir):
     assert (
         small_wordsearch.find_word_with_direction(word, location, direction) == result
     )
+
+
+@patch("wordsearch.WordSearch.find_word_at_location")
+@patch("wordsearch.WordSearch.find_starting_letter")
+def test_find_words(mock_find_starting_letter, mock_find_word_at_location, datadir):
+    """ Test that the find word function calls the correct functions """
+    small_wordsearch = WordSearch(datadir.join("small_set.txt"))
+    mock_find_starting_letter.return_value = [(0, 0), (0, 3)]
+    mock_find_word_at_location.return_value = None
+    small_wordsearch.find_word("TEST")
+    assert mock_find_starting_letter.called_with("TEST")
+    mock_find_word_at_location.assert_has_calls(
+        [call("TEST", (0, 0)), call("TEST", (0, 3))]
+    )
