@@ -26,8 +26,8 @@ def datadir(tmpdir, request):
 
 def test_open_file__reads_word_list(datadir):
     """ Try to open a word file """
-    my_wordsearch = WordSearch(datadir.join("valid_words.txt"))
-    assert my_wordsearch.words == [
+    valid_wordsearch = WordSearch(datadir.join("valid_words.txt"))
+    assert valid_wordsearch.words == [
         "BONES",
         "KHAN",
         "KIRK",
@@ -36,3 +36,6 @@ def test_open_file__reads_word_list(datadir):
         "SULU",
         "UHURA",
     ]
+
+    missing_wordsearch = WordSearch(datadir.join("missing_words.txt"))
+    assert missing_wordsearch.words == ["KYLE", "VANILLA", "WOMBAT", "TREES", "LIBRARY"]
