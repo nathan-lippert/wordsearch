@@ -51,7 +51,7 @@ def test_open_file__handles_blank_case(datadir):
 def test_open_file__reads_letter_table(datadir):
     """ Test that the letter table is read in """
     valid_wordsearch = WordSearch(datadir.join("valid_words.txt"))
-    assert valid_wordsearch.letters == [
+    assert valid_wordsearch.search_grid == [
         ["U", "M", "K", "H", "U", "L", "K", "I", "N", "V", "J", "O", "C", "W", "E"],
         ["L", "L", "S", "H", "K", "Z", "Z", "W", "Z", "C", "G", "J", "U", "Y", "G"],
         ["H", "S", "U", "P", "J", "P", "R", "J", "D", "H", "S", "B", "X", "T", "G"],
