@@ -144,8 +144,29 @@ def test_find_word_at_location__returns_expected_value(
         ("SET", (1, 1), (1, 1), [(1, 1), (2, 2), (3, 3)]),
     ],
 )
-def test_find_word_with_direction(word, location, direction, result, datadir):
+def test_find_word_with_direction__success_case(
+    word, location, direction, result, datadir
+):
     """ Test that a word can be found with a specified direction """
+    small_wordsearch = WordSearch(datadir.join("small_set.txt"))
+    assert (
+        small_wordsearch.find_word_with_direction(word, location, direction) == result
+    )
+
+
+@pytest.mark.parametrize(
+    "word,location,direction,result",
+    [
+        ("TEST", (0, 0), (0, -1), None),
+        ("TEST", (0, 0), (-1, 0), None),
+        ("TEST", (3, 3), (1, 0), None),
+        ("TEST", (3, 3), (0, 1), None),
+    ],
+)
+def test_find_word_with_direction__out_of_bounds(
+    word, location, direction, result, datadir
+):
+    """ Test that if we would go off the grid we stop to avoid IndexError """
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
     assert (
         small_wordsearch.find_word_with_direction(word, location, direction) == result
