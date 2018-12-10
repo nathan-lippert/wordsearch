@@ -1,1 +1,1 @@
-docker build -t wordsearch . && docker run wordsearch
+docker build -t wordsearch . && docker run wordsearch --file /kata/example_words.txt
