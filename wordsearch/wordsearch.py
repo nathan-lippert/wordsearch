@@ -16,3 +16,6 @@ class WordSearch(object):
         self.words = input_data.split("\n")[0].split(",")
         if self.words == [""]:
             raise InvalidInput("No word list on first line of input file.")
+        self.search_grid = [
+            input_line.split(",") for input_line in input_data.split("\n")[1:]
+        ]
