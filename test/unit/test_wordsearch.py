@@ -92,6 +92,7 @@ def test_find_word_at_location__calls_find_word_with_direction(
 ):
     """ Test that find word at location calls find word with direction
         with the expected arguments (8 different directions) """
+    mock_find_word_with_direction.return_value = None
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
     small_wordsearch.find_word_at_location("SOUP", (0, 0))
     calls = [
