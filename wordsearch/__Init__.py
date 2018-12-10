@@ -1,3 +1,3 @@
 """ __init__.py for wordsearch """
 
-from wordsearch.wordsearch import WordSearch
+from wordsearch.wordsearch import WordSearch, InvalidInput
