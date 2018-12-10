@@ -167,9 +167,19 @@ def test_find_word(mock_find_starting_letter, mock_find_word_at_location, datadi
 
 
 @patch("wordsearch.WordSearch.find_word")
-def test_find_words(mock_find_word, datadir):
+def test_find_words__correct_calls(mock_find_word, datadir):
     """ Test that find words makes the right calls """
     mock_find_word.return_value = [(0, 0), (0, 1), (0, 2)]
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
     small_wordsearch.find_words()
     assert mock_find_word.has_calls(call("TEST"), call("SET"))
+
+
+@patch("wordsearch.WordSearch.find_word")
+def test_find_words__correct_output(mock_find_word, datadir, capfd):
+    """ Test that find words makes the right calls """
+    mock_find_word.return_value = [(0, 0), (0, 1), (0, 2)]
+    small_wordsearch = WordSearch(datadir.join("small_set.txt"))
+    small_wordsearch.find_words()
+    out, _ = capfd.readouterr()
+    assert out == "TEST: (0,0),(0,1),(0,2)\nSET: (0,0),(0,1),(0,2)"
