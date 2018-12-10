@@ -71,6 +71,7 @@ def test_open_file__reads_letter_table(datadir):
 
 
 def test_find_starting_letter__valid_word(datadir):
+    """ Test that we find the potential starting points correctly """
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
     assert small_wordsearch.find_starting_letter(small_wordsearch.words[0]) == [
         (0, 0),
@@ -82,3 +83,11 @@ def test_find_starting_letter__valid_word(datadir):
         (3, 2),
         (3, 3),
     ]
+
+
+def test_find_word_at_location__success(datadir):
+    """ Test that given a starting location we can find a word when it's there """
+    small_wordsearch = WordSearch(datadir.join("small_set.txt"))
+    assert small_wordsearch.find_word_at_location(
+        small_wordsearch.words[0], (0, 0)
+    ) == [(0, 0), (0, 1), (0, 2), (0, 3)]
