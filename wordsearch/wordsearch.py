@@ -30,3 +30,18 @@ class WordSearch(object):
                     starting_locations.append((row_idx, col_idx))
 
         return starting_locations
+
+    def find_word_at_location(self, word, location):
+        """ Return the indeces for the letters if the word is found """
+
+        word_idx = 0
+        word_locations = []
+
+        while True:
+            if word_idx == len(word):
+                return word_locations
+            if self.search_grid[location[0]][location[1]] != word[word_idx]:
+                return None
+            word_locations.append(location)
+            location = (location[0], location[1] + 1)
+            word_idx += 1
