@@ -3,9 +3,10 @@
 from distutils import dir_util
 import os
 
+import pytest
 from pytest import fixture
 
-from wordsearch import WordSearch
+from wordsearch import WordSearch, InvalidInput
 
 
 @fixture
@@ -39,3 +40,9 @@ def test_open_file__reads_word_list(datadir):
 
     missing_wordsearch = WordSearch(datadir.join("missing_words.txt"))
     assert missing_wordsearch.words == ["KYLE", "VANILLA", "WOMBAT", "TREES", "LIBRARY"]
+
+
+def test_open_file__handles_blank_case(datadir):
+    """ Test blank case for word list """
+    with pytest.raises(InvalidInput):
+        WordSearch(datadir.join("blank.txt"))
