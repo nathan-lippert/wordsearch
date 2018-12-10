@@ -72,3 +72,8 @@ class WordSearch(object):
             result = self.find_word_at_location(word, location)
             if result:
                 return result
+
+    def find_words(self):
+        """ Find all the words from the input file """
+        for word in self.words:
+            self.find_word(word)
