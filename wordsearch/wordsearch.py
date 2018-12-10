@@ -59,6 +59,11 @@ class WordSearch(object):
         while True:
             if word_idx == len(word):
                 return word_locations
+            if not (
+                (0 <= location[0] < len(self.search_grid))
+                and (0 <= location[1] < len(self.search_grid[0]))
+            ):
+                return None
             if self.search_grid[location[0]][location[1]] != word[word_idx]:
                 return None
             word_locations.append(location)
