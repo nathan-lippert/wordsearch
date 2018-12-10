@@ -3,7 +3,7 @@
 from distutils import dir_util
 import os
 
-from mock import patch
+from mock import patch, call
 import pytest
 from pytest import fixture
 
@@ -91,10 +91,20 @@ def test_find_word_at_location__calls_find_word_with_direction(
     mock_find_word_with_direction, datadir
 ):
     """ Test that find word at location calls find word with direction
-        with the expected arguments """
+        with the expected arguments (8 different directions) """
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
     small_wordsearch.find_word_at_location("SOUP", (0, 0))
-    mock_find_word_with_direction.assert_called_with("SOUP", (0, 0), (0, 1))
+    calls = [
+        call("SOUP", (0, 0), (0, 1)),
+        call("SOUP", (0, 0), (1, 1)),
+        call("SOUP", (0, 0), (1, 0)),
+        call("SOUP", (0, 0), (1, -1)),
+        call("SOUP", (0, 0), (0, -1)),
+        call("SOUP", (0, 0), (-1, -1)),
+        call("SOUP", (0, 0), (-1, 0)),
+        call("SOUP", (0, 0), (-1, 1)),
+    ]
+    mock_find_word_with_direction.assert_has_calls(calls)
 
 
 @pytest.mark.parametrize(
