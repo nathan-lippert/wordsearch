@@ -76,4 +76,6 @@ class WordSearch(object):
     def find_words(self):
         """ Find all the words from the input file """
         for word in self.words:
-            self.find_word(word)
+            result = self.find_word(word)
+            if result:
+                print(f"{word}: {result}")
