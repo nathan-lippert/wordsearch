@@ -114,7 +114,7 @@ def test_find_word_at_location__calls_find_word_with_direction_shortcircuit(
 ):
     """ Test that find word at location calls find word with direction
         and shortcircuits with a success """
-    mock_find_word_with_direction.return_value = None
+    mock_find_word_with_direction.return_value = [(0, 0), (0, 1), (0, 2), (0, 3)]
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
     small_wordsearch.find_word_at_location("TEST", (0, 0))
     # This works because assert_called_with only checks the last call.
