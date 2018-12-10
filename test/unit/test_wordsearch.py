@@ -26,7 +26,7 @@ def datadir(tmpdir, request):
     return tmpdir
 
 
-def test_open_file__reads_word_list(datadir):
+def test_init__reads_word_list(datadir):
     """ Try to open a word file, make sure the list of words is read """
     valid_wordsearch = WordSearch(datadir.join("valid_words.txt"))
     assert valid_wordsearch.words == [
@@ -43,13 +43,13 @@ def test_open_file__reads_word_list(datadir):
     assert missing_wordsearch.words == ["KYLE", "VANILLA", "WOMBAT", "TREES", "LIBRARY"]
 
 
-def test_open_file__handles_blank_case(datadir):
+def test_init__handles_blank_case(datadir):
     """ Test blank case for word list """
     with pytest.raises(InvalidInput):
         WordSearch(datadir.join("blank.txt"))
 
 
-def test_open_file__reads_letter_table(datadir):
+def test_init__reads_letter_table(datadir):
     """ Test that the letter table is read in """
     valid_wordsearch = WordSearch(datadir.join("valid_words.txt"))
     assert valid_wordsearch.search_grid == [
@@ -69,6 +69,13 @@ def test_open_file__reads_letter_table(datadir):
         ["W", "Z", "M", "I", "S", "U", "K", "U", "R", "B", "I", "D", "U", "X", "S"],
         ["K", "Y", "L", "B", "Q", "Q", "P", "M", "D", "F", "C", "K", "E", "A", "B"],
     ]
+
+
+def test_init__sets_rows_cols(datadir):
+    """ Test that we set row/col values """
+    small_wordsearch = WordSearch(datadir.join("small_set.txt"))
+    assert small_wordsearch.num_rows == 4
+    assert small_wordsearch.num_cols == 4
 
 
 def test_find_starting_letter__valid_word(datadir):
