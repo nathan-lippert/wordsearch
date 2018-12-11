@@ -37,4 +37,6 @@ def datadir(tmpdir):
 )
 def test_find_words__correct_output(file, result, datadir):
     """ Test that find words makes the right calls """
-    assert subprocess.check_output(["wordsearch", datadir.join(file)]) == result
+    assert (
+        subprocess.check_output(["wordsearch", datadir.join(file)]).decode() == result
+    )

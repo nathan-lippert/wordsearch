@@ -200,9 +200,8 @@ def test_find_words__correct_calls(mock_find_word, datadir):
 @patch("wordsearch.WordSearch.find_word")
 def test_find_words__correct_output(mock_find_word, datadir, capfd):
     """ Test that find words makes the right calls """
-    find_word_return_val = [(0, 0), (0, 1), (0, 2)]
-    mock_find_word.return_value = find_word_return_val
+    mock_find_word.return_value = [(0, 0), (0, 1), (0, 2)]
     small_wordsearch = WordSearch(datadir.join("small_set.txt"))
     small_wordsearch.find_words()
     out, _ = capfd.readouterr()
-    assert out == f"TEST: {find_word_return_val}\nSET: {find_word_return_val}\n"
+    assert out == f"TEST: (0,0),(1,0),(2,0)\nSET: (0,0),(1,0),(2,0)\n"
