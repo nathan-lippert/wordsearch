@@ -43,6 +43,12 @@ def test_init__handles_blank_case(datadir):
         WordSearch(datadir.join("blank.txt"))
 
 
+def test_init__handles_missing_input(datadir):
+    """ Test blank case for word list """
+    with pytest.raises(InvalidInput):
+        WordSearch(datadir.join("missing_file.txt"))
+
+
 def test_init__reads_letter_table(datadir):
     """ Test that the letter table is read in """
     valid_wordsearch = WordSearch(datadir.join("valid_words.txt"))
