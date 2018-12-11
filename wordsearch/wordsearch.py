@@ -24,7 +24,9 @@ class WordSearch(object):
         self.words = input_lines[0].split(",")
         if self.words == [""]:
             raise InvalidInput("No word list on first line of input file.")
-        self.search_grid = [input_line.split(",") for input_line in input_lines[1:]]  # All lines but the first line
+        self.search_grid = [
+            input_line.split(",") for input_line in input_lines[1:]
+        ]  # All lines but the first line
         self.num_rows = len(self.search_grid)
         self.num_cols = len(self.search_grid[0])
 
@@ -71,10 +73,15 @@ class WordSearch(object):
                 and (0 <= location[1] < self.num_cols)
             ):
                 return None
-            if self.search_grid[location[0]][location[1]] != word[word_idx]:  # If we found a different letter
+            if (
+                self.search_grid[location[0]][location[1]] != word[word_idx]
+            ):  # If we found a different letter
                 return None
             word_locations.append(location)
-            location = (location[0] + direction[0], location[1] + direction[1])  # Go further in the chosen direction
+            location = (
+                location[0] + direction[0],
+                location[1] + direction[1],
+            )  # Go further in the chosen direction
             word_idx += 1
         return word_locations
 
