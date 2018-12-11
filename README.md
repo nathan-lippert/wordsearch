@@ -16,7 +16,7 @@ To build/run on a different OS, simply run the two commands in the wordsearch.ba
 
 Then
 
-<pre>docker run -rm wordsearch /input_files/[your input file name]</pre>
+<pre>docker run --rm wordsearch /input_files/[your input file name]</pre>
 
 
 The tests are automatically run as a part of the container build process (along with black enforcement).
