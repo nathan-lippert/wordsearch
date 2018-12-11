@@ -1,7 +1,7 @@
 Word Search Kata
 ================
 
-The only dependency to run this solution is Docker, which can be installed easily on linux, mac, or windows:
+The only dependency to run this solution is Docker, which can be installed easily on linux, mac, or windows.
 
 To build/run on a windows machine simply run wordsearch.bat from the repository directory with the input file of your choice:
 
@@ -16,7 +16,7 @@ docker build -t wordsearch .
 
 Then
 
-docker run -rm wordsearch /input_files/<your input file name>
+docker run -rm wordsearch /input_files/[your input file name]
 
 
 The tests are automatically run as a part of the container build process (along with black enforcement).
