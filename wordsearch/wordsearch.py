@@ -1,6 +1,9 @@
 """ Defines the WordSearch class """
 
 
+import os
+
+
 class InvalidInput(Exception):
     """ Custom exception """
 
@@ -11,6 +14,10 @@ class WordSearch(object):
     """ Performs a wordsearch on a given input file """
 
     def __init__(self, input_file):
+        if not os.path.exists(input_file):
+            raise InvalidInput(
+                f"Input file {input_file} does not exist. Do you need to add it to the input_files directory?"
+            )
         with open(input_file, "r") as input_fh:
             input_data = input_fh.read()
         input_lines = input_data.split("\n")
