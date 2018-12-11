@@ -24,7 +24,7 @@ class WordSearch(object):
         self.words = input_lines[0].split(",")
         if self.words == [""]:
             raise InvalidInput("No word list on first line of input file.")
-        self.search_grid = [input_line.split(",") for input_line in input_lines[1:]]
+        self.search_grid = [input_line.split(",") for input_line in input_lines[1:]]  # All lines but the first line
         self.num_rows = len(self.search_grid)
         self.num_cols = len(self.search_grid[0])
 
@@ -44,14 +44,14 @@ class WordSearch(object):
         """ Return the indeces for the letters if the word is found """
 
         directions = [
-            (0, 1),
-            (1, 1),
-            (1, 0),
-            (1, -1),
-            (0, -1),
-            (-1, -1),
-            (-1, 0),
-            (-1, 1),
+            (0, 1),  # Right
+            (1, 1),  # Down and Right
+            (1, 0),  # Down
+            (1, -1),  # Down and Left
+            (0, -1),  # Left
+            (-1, -1),  # Up and Left
+            (-1, 0),  # Up
+            (-1, 1),  # Up and Right
         ]
 
         for direction in directions:
@@ -65,19 +65,18 @@ class WordSearch(object):
         word_idx = 0
         word_locations = []
 
-        while True:
-            if word_idx == len(word):
-                return word_locations
-            if not (
+        while word_idx < len(word):
+            if not (  # If location out of bounds
                 (0 <= location[0] < self.num_rows)
                 and (0 <= location[1] < self.num_cols)
             ):
                 return None
-            if self.search_grid[location[0]][location[1]] != word[word_idx]:
+            if self.search_grid[location[0]][location[1]] != word[word_idx]:  # If we found a different letter
                 return None
             word_locations.append(location)
-            location = (location[0] + direction[0], location[1] + direction[1])
+            location = (location[0] + direction[0], location[1] + direction[1])  # Go further in the chosen direction
             word_idx += 1
+        return word_locations
 
     def find_word(self, word):
         """ Find a word in the letter grid, return locations """
