@@ -11,17 +11,11 @@ from wordsearch import WordSearch, InvalidInput
 
 
 @fixture
-def datadir(tmpdir, request):
-    """ Fixture responsible for searching a folder with the same name of test
-    module and, if available, moving all contents to a temporary directory so
-    tests can use them freely.
-    https://stackoverflow.com/questions/29627341/pytest-where-to-store-expected-data """
+def datadir(tmpdir):
+    """ Copy test data to tmpdir so we don't mess it up somehow """
 
-    filename = request.module.__file__
-    test_dir, _ = os.path.splitext(filename)
-
-    if os.path.isdir(test_dir):
-        dir_util.copy_tree(test_dir, str(tmpdir))
+    test_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "test_data")
+    dir_util.copy_tree(test_dir, str(tmpdir))
 
     return tmpdir
 
