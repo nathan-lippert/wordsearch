@@ -84,5 +84,6 @@ class WordSearch(object):
         """ Find all the words from the input file """
         for word in self.words:
             result = self.find_word(word)
-            if result:
-                print(f"{word}: {result}")
+            formatted_coords = [f"({coord[1]},{coord[0]})" for coord in result]
+            result_str = ",".join(formatted_coords)
+            print(f"{word}: {result_str}")

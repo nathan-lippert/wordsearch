@@ -33,8 +33,8 @@ def test_init__reads_word_list(datadir):
         "UHURA",
     ]
 
-    missing_wordsearch = WordSearch(datadir.join("missing_words.txt"))
-    assert missing_wordsearch.words == ["KYLE", "VANILLA", "WOMBAT", "TREES", "LIBRARY"]
+    alternative_wordsearch = WordSearch(datadir.join("alternative_set.txt"))
+    assert alternative_wordsearch.words == ["KYLE", "TREES", "LIBRARY"]
 
 
 def test_init__handles_blank_case(datadir):
